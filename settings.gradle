@@ -1,0 +1,22 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "PanicMode"
+include ':app'
+include ':ui:ui-splash'
+include ':ui:ui-actions'
+include ':data'
+include ':domain'
+include ':ui:ui-common'
+include ':ui:ui-wizard'
