@@ -10,11 +10,13 @@ import com.pefdneves.data.Result.Error
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class ActionLocalDataSource internal constructor(
-    private val actionDao: ActionDao,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+class ActionLocalDataSource @Inject constructor(
+    private val actionDao: ActionDao
 ): ActionsDataSource {
+
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 
     override fun observeActions(): LiveData<Result<List<Action>>> {
         return actionDao.observeActions().map {
