@@ -21,8 +21,7 @@ import androidx.room.Index
         )
     ]
 )
-class ActionSmsData (
+class ActionSmsData(
     @ColumnInfo(name = "message") var message: String = "",
     @ColumnInfo(name = "recipient") var recipient: String = "",
 ) : ActionData()
-

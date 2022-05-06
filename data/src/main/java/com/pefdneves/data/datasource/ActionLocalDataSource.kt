@@ -3,10 +3,10 @@ package com.pefdneves.data.datasource
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.pefdneves.data.Result
+import com.pefdneves.data.Result.Error
+import com.pefdneves.data.Result.Success
 import com.pefdneves.data.dao.ActionDao
 import com.pefdneves.data.entity.Action
-import com.pefdneves.data.Result.Success
-import com.pefdneves.data.Result.Error
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class ActionLocalDataSource @Inject constructor(
     private val actionDao: ActionDao
-): ActionsDataSource {
+) : ActionsDataSource {
 
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 

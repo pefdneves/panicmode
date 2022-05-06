@@ -1,8 +1,8 @@
 package com.pefdneves.data.datasource
 
 import androidx.lifecycle.LiveData
-import com.pefdneves.data.entity.Action
 import com.pefdneves.data.Result
+import com.pefdneves.data.entity.Action
 
 interface ActionsDataSource {
 
@@ -19,5 +19,4 @@ interface ActionsDataSource {
     suspend fun completeAction(actionId: Long)
 
     suspend fun deleteAction(actionId: Long)
-
 }
