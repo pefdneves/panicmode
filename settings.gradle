@@ -12,6 +12,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
+enableFeaturePreview('VERSION_CATALOGS')
+
 rootProject.name = "PanicMode"
 include ':app'
 include ':ui:ui-splash'
