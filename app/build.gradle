@@ -27,7 +27,18 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0-alpha08"
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
     }
 }
 
@@ -42,6 +53,9 @@ dependencies {
     implementation libs.androidx.core
     implementation libs.androidx.appcompat
     implementation libs.android.material
+    implementation libs.androidx.navigation.compose
+    implementation libs.compose.foundation.foundation
+    implementation libs.compose.material.material
 
     testImplementation libs.android.material
     testImplementation libs.junit
