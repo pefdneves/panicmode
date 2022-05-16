@@ -6,11 +6,16 @@ buildscript {
             'minSdk'    : 27,
             'targetSdk' : 32,
     ]
+    ext.kotlinCompilerExtension = "1.2.0-alpha08"
+    dependencies {
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.41"
+    }
 }
 
 plugins {
     alias(libs.plugins.androidapplication) apply false
     alias(libs.plugins.androidlibrary) apply false
     alias(libs.plugins.kotlinandroid) apply false
+    alias(libs.plugins.daggerhilt) apply false
     alias(libs.plugins.spotless)
 }

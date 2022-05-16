@@ -7,9 +7,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
+import com.pefdneves.ui.common.Screen
 import com.pefdneves.panicmode.ui.theme.PanicModeTheme
 import com.pefdneves.ui.splash.Splash
+import com.pefdneves.ui.wizard.Wizard
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,13 +29,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-    val navController = rememberNavController()
+    val navigationController by rememberUpdatedState(newValue = rememberNavController())
     NavHost(
-        navController = navController,
+        navController = navigationController,
         startDestination = Screen.Splash.route,
     ) {
         composable(Screen.Splash.route) {
-            Splash(navController = navController)
+            Splash(navController = navigationController)
+        }
+        composable(Screen.Wizard.route) {
+            Wizard(navController = navigationController)
         }
     }
 }

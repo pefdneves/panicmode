@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id "kotlin-android"
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -21,14 +23,21 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0-alpha08"
+        kotlinCompilerExtensionVersion = kotlinCompilerExtension
     }
 }
 
 dependencies {
+    implementation project(':ui:ui-common')
+
     implementation libs.compose.foundation.layout
     implementation libs.androidx.navigation.compose
+    implementation libs.compose.runtime.runtime
     implementation libs.compose.material.material
+
+    implementation libs.dagger.hilt
+    implementation libs.androidx.hilt.compose
+    kapt libs.dagger.hilt.compiler
 
     testImplementation libs.junit
 }
