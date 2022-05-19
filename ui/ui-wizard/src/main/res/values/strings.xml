@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="wizard_title">How to use</string>
+    <string name="wizard_title">How</string>
+    <string name="wizard_subtitle">to use the app</string>
     <string name="wizard_entry_test_title">titulo teste</string>
     <string name="wizard_entry_test_description">descrição teste</string>
+    <string name="wizard_btn_start">Start</string>
 </resources>

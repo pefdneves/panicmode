@@ -28,11 +28,11 @@ android {
 dependencies {
     implementation project(':ui:ui-common')
 
-    implementation("com.google.accompanist:accompanist-pager:0.12.0")
-
     implementation libs.compose.foundation.layout
     implementation libs.androidx.navigation.compose
     implementation libs.compose.material.material
+    implementation libs.compose.ui
+    implementation libs.accompanist.accompanistpager
 
     testImplementation libs.junit
 }
