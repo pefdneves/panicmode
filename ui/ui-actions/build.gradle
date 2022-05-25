@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id "kotlin-android"
+    id 'kotlin-kapt'
 }
 
 android {
@@ -17,8 +18,24 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11
     }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
+    implementation project(':data')
+
+    implementation libs.androidx.fragment
+    implementation libs.androidx.recyclerview
+    implementation libs.androidx.coordinatorlayout
+    implementation libs.nambimobile.expandablefab
+
+    implementation libs.androidx.lifecycle.livedata
+
+    implementation libs.dagger.hilt
+    implementation libs.androidx.hilt.compose
+    kapt libs.dagger.hilt.compiler
+
     testImplementation libs.junit
 }

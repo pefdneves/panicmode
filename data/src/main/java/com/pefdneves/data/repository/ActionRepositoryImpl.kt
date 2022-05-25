@@ -4,6 +4,11 @@ import androidx.lifecycle.LiveData
 import com.pefdneves.data.Result
 import com.pefdneves.data.datasource.ActionLocalDataSource
 import com.pefdneves.data.entity.Action
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
 class ActionRepositoryImpl @Inject constructor(
@@ -23,4 +28,11 @@ class ActionRepositoryImpl @Inject constructor(
     override suspend fun completeAction(actionId: Long) = actionLocalDataSource.completeAction(actionId)
 
     override suspend fun deleteAction(actionId: Long) = actionLocalDataSource.deleteAction(actionId)
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class ActionsRepositoryModule {
+    @Binds
+    abstract fun provideActionsRepository(actionRepositoryImpl: ActionRepositoryImpl): ActionRepository
 }

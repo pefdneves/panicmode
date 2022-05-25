@@ -6,25 +6,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import com.pefdneves.ui.common.Screen
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.compose.runtime.getValue
 
 @Composable
-fun Splash(navController: NavHostController) {
+fun Splash(onNavigate: (String) -> Unit) {
     Splash(
         hiltViewModel(),
-        navController
+        onNavigate
     )
 }
 
 @Composable
-internal fun Splash(viewModel: SplashViewModel, navController: NavHostController) {
+internal fun Splash(viewModel: SplashViewModel, onNavigate: (String) -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.align(Alignment.Center),
@@ -35,6 +31,6 @@ internal fun Splash(viewModel: SplashViewModel, navController: NavHostController
         }
     }
     viewModel.isFirstRun.value?.getContentIfNotHandled()?.also {
-        navController.navigate(Screen.Wizard.route)
+        onNavigate(Screen.Wizard.route)
     }
 }
