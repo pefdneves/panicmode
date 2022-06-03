@@ -21,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.util.lerp
 import com.google.accompanist.pager.*
-import com.pefdneves.ui.common.Screen
+import com.pefdneves.ui.common.R as UiCommonR
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.yield
 import kotlin.math.absoluteValue
@@ -34,7 +34,7 @@ lateinit var pagerState: PagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun Wizard(onNavigate: (String) -> Unit) {
+fun Wizard(onNavigate: (Int) -> Unit) {
     pagerState = rememberPagerState(
         pageCount = getWizardEntries(LocalContext.current).size
     )
@@ -182,7 +182,7 @@ private fun title(item: WizardEntry) {
 @Composable
 private fun startButton(
     isVisible: Boolean,
-    onNavigate: (String) -> Unit
+    onNavigate: (Int) -> Unit
 ) {
     AnimatedVisibility(
         visible = isVisible
@@ -199,7 +199,7 @@ private fun startButton(
                         end = dimensionResource(R.dimen.wizard_pager_padding_right_left)
                     ),
                 onClick = {
-                    onNavigate(Screen.Actions.route)
+                    onNavigate(UiCommonR.id.action_wizard_to_actions)
                 }) {
                 Text(
                     text = LocalContext.current.getString(R.string.wizard_btn_start),

@@ -8,11 +8,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.pefdneves.ui.common.Screen
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pefdneves.ui.common.R as UiCommonR
 
 @Composable
-fun Splash(onNavigate: (String) -> Unit) {
+fun Splash(onNavigate: (Int) -> Unit) {
     Splash(
         hiltViewModel(),
         onNavigate
@@ -20,7 +20,7 @@ fun Splash(onNavigate: (String) -> Unit) {
 }
 
 @Composable
-internal fun Splash(viewModel: SplashViewModel, onNavigate: (String) -> Unit) {
+internal fun Splash(viewModel: SplashViewModel, onNavigate: (Int) -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.align(Alignment.Center),
@@ -31,6 +31,6 @@ internal fun Splash(viewModel: SplashViewModel, onNavigate: (String) -> Unit) {
         }
     }
     viewModel.isFirstRun.value?.getContentIfNotHandled()?.also {
-        onNavigate(Screen.Wizard.route)
+        onNavigate(UiCommonR.id.action_splash_to_wizard)
     }
 }

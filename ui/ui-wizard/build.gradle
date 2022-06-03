@@ -28,11 +28,16 @@ android {
 dependencies {
     implementation project(':ui:ui-common')
 
+    implementation libs.androidx.fragment
     implementation libs.compose.foundation.layout
-    implementation libs.androidx.navigation.compose
     implementation libs.compose.material.material
     implementation libs.compose.ui
     implementation libs.accompanist.accompanistpager
+
+    implementation libs.androidx.navigationui
+    implementation libs.androidx.navigationfragment
+
+    implementation libs.androidx.hilt.compose
 
     testImplementation libs.junit
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dest_splash">
+
+    <fragment
+        android:id="@+id/dest_splash"
+        android:name="com.pefdneves.ui.splash.SplashFragment">
+
+        <action
+            android:id="@+id/action_splash_to_wizard"
+            app:destination="@id/dest_wizard"/>
+    </fragment>
+    <fragment
+        android:id="@+id/dest_wizard"
+        android:name="com.pefdneves.ui.wizard.WizardFragment">
+
+        <action
+            android:id="@+id/action_wizard_to_actions"
+            app:destination="@id/dest_actions"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/dest_actions"
+        android:name="com.pefdneves.ui.actions.ActionsFragment"/>
+</navigation>

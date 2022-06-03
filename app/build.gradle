@@ -54,16 +54,17 @@ dependencies {
     implementation project(':ui:ui-wizard')
     implementation project(':ui:ui-actions')
 
-    implementation libs.dagger.hilt
-    kapt libs.dagger.hilt.compiler
-
     implementation libs.androidx.core
     implementation libs.androidx.appcompat
     implementation libs.android.material
-    implementation libs.androidx.navigation.compose
+    implementation libs.androidx.navigationfragment
+    implementation libs.androidx.constraintlayout
     implementation libs.compose.foundation.foundation
     implementation libs.compose.material.material
     implementation libs.compose.ui
+
+    kapt libs.dagger.hilt.compiler
+    implementation libs.dagger.hilt
 
     testImplementation libs.android.material
     testImplementation libs.junit

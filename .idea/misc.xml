@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/github/panicmode/app/src/main/res/layout/activity_main.xml" value="0.1171875" />
+        <entry key="..\:/github/panicmode/ui/ui-actions/src/main/res/layout/floating_action_menu.xml" value="0.14010416666666667" />
         <entry key="..\:/github/panicmode/ui/ui-actions/src/main/res/layout/fragment_actions.xml" value="0.1171875" />
+        <entry key="..\:/github/panicmode/ui/ui-actions/src/main/res/layout/item_action.xml" value="0.2361111111111111" />
         <entry key="..\:/github/panicmode/ui/ui-actions/src/main/res/layout/item_task.xml" value="0.125" />
       </map>
     </option>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_send_sms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/holo_purple"
+            android:padding="4dp"
+            android:src="@android:drawable/ic_dialog_email"
+            android:visibility="gone"
+            app:backgroundTint="@android:color/holo_red_dark"
+            app:tint="@android:color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_delete_folder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/holo_purple"
+            android:padding="4dp"
+            android:src="@android:drawable/ic_menu_set_as"
+            android:visibility="gone"
+            app:backgroundTint="@android:color/holo_red_dark"
+            app:tint="@android:color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/holo_purple"
+            android:padding="4dp"
+            android:src="@android:drawable/ic_btn_speak_now"
+            app:backgroundTint="@android:color/holo_red_dark"
+            app:tint="@android:color/white" />
+
+    </LinearLayout>
+
+</layout>

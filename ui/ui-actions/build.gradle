@@ -24,17 +24,17 @@ android {
 }
 
 dependencies {
+    implementation project(':ui:ui-common')
     implementation project(':data')
 
     implementation libs.androidx.fragment
     implementation libs.androidx.recyclerview
     implementation libs.androidx.coordinatorlayout
-    implementation libs.nambimobile.expandablefab
+    implementation libs.androidx.constraintlayout
+    implementation libs.android.material
 
     implementation libs.androidx.lifecycle.livedata
-
     implementation libs.dagger.hilt
-    implementation libs.androidx.hilt.compose
     kapt libs.dagger.hilt.compiler
 
     testImplementation libs.junit
