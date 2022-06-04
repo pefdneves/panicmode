@@ -4,13 +4,25 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,11 +32,16 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.util.lerp
-import com.google.accompanist.pager.*
-import com.pefdneves.ui.common.R as UiCommonR
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.PagerScope
+import com.google.accompanist.pager.PagerState
+import com.google.accompanist.pager.calculateCurrentOffsetForPage
+import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.yield
 import kotlin.math.absoluteValue
+import com.pefdneves.ui.common.R as UiCommonR
 
 private const val PAGER_AUTO_SCROLL_TIME_MS = 5000L
 private const val PAGER_ANIMATION_TWEEN_MS = 600
@@ -123,7 +140,8 @@ private fun wizardTitleAndSubtitle() {
         text = LocalContext.current.getString(R.string.wizard_subtitle),
         style = MaterialTheme.typography.h4,
         modifier = Modifier.padding(
-            start = dimensionResource(R.dimen.wizard_title_subtitle_padding
+            start = dimensionResource(
+                R.dimen.wizard_title_subtitle_padding
             )
         ),
         color = MaterialTheme.colors.primary,
@@ -200,7 +218,8 @@ private fun startButton(
                     ),
                 onClick = {
                     onNavigate(UiCommonR.id.action_wizard_to_actions)
-                }) {
+                }
+            ) {
                 Text(
                     text = LocalContext.current.getString(R.string.wizard_btn_start),
                     color = Color.White

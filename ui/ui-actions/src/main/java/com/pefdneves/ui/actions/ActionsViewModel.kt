@@ -1,6 +1,12 @@
 package com.pefdneves.ui.actions
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
+import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import com.pefdneves.data.Result
 import com.pefdneves.data.entity.Action
 import com.pefdneves.data.entity.ActionSmsData
@@ -40,5 +46,4 @@ class ActionsViewModel @Inject constructor(
             )
         }
     }
-
 }

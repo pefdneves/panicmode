@@ -17,8 +17,8 @@ fun setActions(listView: RecyclerView, items: List<Action>?) {
 }
 
 @BindingAdapter(value = ["bind:actionTypeToItemDescription", "bind:actionDescriptionToItemDescription"], requireAll = true)
-fun setItemDescription (textView: TextView, type: ActionType?, data: ActionData?) {
-    data?.also {  actionData ->
+fun setItemDescription(textView: TextView, type: ActionType?, data: ActionData?) {
+    data?.also { actionData ->
         type?.also { actionType ->
             val context = textView.context
             textView.text = when (actionType) {
@@ -33,7 +33,7 @@ fun setItemDescription (textView: TextView, type: ActionType?, data: ActionData?
 }
 
 @BindingAdapter("bind:actionTypeToItemType")
-fun setItemTitle (textView: TextView, type: ActionType?) {
+fun setItemTitle(textView: TextView, type: ActionType?) {
     val context = textView.context
     type?.also {
         textView.text = when (type) {

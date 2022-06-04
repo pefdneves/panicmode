@@ -14,8 +14,7 @@ internal class SplashViewModel @Inject constructor() : ViewModel() {
     val isFirstRun: LiveData<Event<Boolean>> = _isFirstRun
 
     init {
-        //TODO: get from shared preferences
+        // TODO: get from shared preferences
         _isFirstRun.value = Event(false)
     }
-
 }

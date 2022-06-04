@@ -10,7 +10,8 @@ import androidx.navigation.findNavController
 
 class WizardFragment : Fragment() {
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return ComposeView(requireContext()).apply {

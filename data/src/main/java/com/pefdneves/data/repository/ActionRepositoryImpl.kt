@@ -6,7 +6,6 @@ import com.pefdneves.data.datasource.ActionLocalDataSource
 import com.pefdneves.data.entity.Action
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
