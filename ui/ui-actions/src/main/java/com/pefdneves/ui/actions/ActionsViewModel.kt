@@ -1,13 +1,11 @@
 package com.pefdneves.ui.actions
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.distinctUntilChanged
-import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
-import com.pefdneves.data.Result
 import com.pefdneves.data.entity.Action
 import com.pefdneves.data.entity.ActionSmsData
 import com.pefdneves.data.entity.ActionType
@@ -21,16 +19,25 @@ class ActionsViewModel @Inject constructor(
     private val actionRepository: ActionRepository
 ) : ViewModel() {
 
-    private val _actions: LiveData<List<Action>> =
-        actionRepository.observeActions().distinctUntilChanged().switchMap { filterActions(it) }
+    private val _actions: MutableLiveData<List<Action>> = MutableLiveData(listOf())
     val actions: LiveData<List<Action>> = _actions
 
     val empty: LiveData<Boolean> = Transformations.map(_actions) {
         it.isEmpty()
     }
 
-    private fun filterActions(actions: Result<List<Action>>): LiveData<List<Action>> {
-        return MutableLiveData(listOf())
+    init {
+        fetchData()
+    }
+
+    private fun fetchData() {
+        viewModelScope.launch {
+            actionRepository.getActions().onSuccess {
+                _actions.value = it
+            }.onFailure {
+                // Error
+            }
+        }
     }
 
     fun option1Clicked() {
@@ -44,6 +51,10 @@ class ActionsViewModel @Inject constructor(
                     )
                 )
             )
+            actionRepository.getActions().onSuccess {
+                Log.e("teste", it.size.toString())
+            }
+            fetchData()
         }
     }
 }

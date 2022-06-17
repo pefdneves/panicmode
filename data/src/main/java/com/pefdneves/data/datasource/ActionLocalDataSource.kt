@@ -2,11 +2,10 @@ package com.pefdneves.data.datasource
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.pefdneves.data.Result
-import com.pefdneves.data.Result.Error
-import com.pefdneves.data.Result.Success
 import com.pefdneves.data.dao.ActionDao
 import com.pefdneves.data.entity.Action
+import com.pefdneves.data.entity.ActionSmsData
+import com.pefdneves.data.entity.ActionType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -20,21 +19,38 @@ class ActionLocalDataSource @Inject constructor(
 
     override fun observeActions(): LiveData<Result<List<Action>>> {
         return actionDao.observeActions().map {
-            Success(it)
+            Result.success(mapActionDataToActions(it))
+        }
+    }
+
+    private fun mapActionDataToActions(it: List<Action>): MutableList<Action> {
+        val newList = mutableListOf<Action>()
+        for (action in it) {
+            newList.add(mapActionDataToAction(action))
+        }
+        return newList
+    }
+
+    private fun mapActionDataToAction(action: Action): Action {
+        return when (action.type) {
+            ActionType.SEND_SMS -> {
+                action.copy(actionData = actionDao.getActionDataSmsForAction(action.entryId))
+            }
+            else -> action
         }
     }
 
     override suspend fun getActions(): Result<List<Action>> = withContext(ioDispatcher) {
         return@withContext try {
-            Success(actionDao.getActions())
+            Result.success(mapActionDataToActions(actionDao.getActions()))
         } catch (e: Exception) {
-            Error(e)
+            Result.failure(e)
         }
     }
 
     override fun observeAction(actionId: Long): LiveData<Result<Action>> {
         return actionDao.observeActionById(actionId).map {
-            Success(it)
+            Result.success((mapActionDataToAction(it)))
         }
     }
 
@@ -42,18 +58,26 @@ class ActionLocalDataSource @Inject constructor(
         try {
             val action = actionDao.getActionById(actionId)
             if (action != null) {
-                return@withContext Success(action)
+                return@withContext Result.success((mapActionDataToAction(action)))
             } else {
-                return@withContext Error(Exception("Action not found!"))
+                return@withContext Result.failure((Exception("Action not found!")))
             }
         } catch (e: Exception) {
-            return@withContext Error(e)
+            return@withContext Result.failure((e))
         }
     }
 
     override suspend fun saveAction(action: Action) {
         return withContext(ioDispatcher) {
             actionDao.insertAction(action)
+            when (action.type) {
+                ActionType.SEND_SMS -> {
+                    (action.actionData as? ActionSmsData)?.also {
+                        actionDao.insertActionDataSms(it)
+                    }
+                }
+                else -> {}
+            }
         }
     }
 

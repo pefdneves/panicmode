@@ -25,6 +25,8 @@ dependencies {
     implementation libs.androidx.appcompat
 
     implementation libs.room.ktx
+    implementation libs.google.gson
+    kapt libs.room.compiler.ktx
 
     implementation libs.dagger.hilt
     kapt libs.dagger.hilt.compiler

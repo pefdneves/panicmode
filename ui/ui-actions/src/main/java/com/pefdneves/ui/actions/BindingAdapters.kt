@@ -12,7 +12,7 @@ import com.pefdneves.ui.common.R as UiCommonR
 @BindingAdapter("app:actions")
 fun setActions(listView: RecyclerView, items: List<Action>?) {
     items?.let {
-        (listView.adapter as ActionsAdapter).submitList(items)
+        (listView.adapter as? ActionsAdapter)?.submitList(items)
     }
 }
 

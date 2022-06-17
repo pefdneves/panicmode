@@ -21,11 +21,10 @@ class ActionsAdapter(private val viewModel: ActionsViewModel) :
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: ItemActionBinding) :
+    class ViewHolder private constructor(private val binding: ItemActionBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(viewModel: ActionsViewModel, item: Action) {
-
             binding.viewmodel = viewModel
             binding.action = item
             binding.executePendingBindings()

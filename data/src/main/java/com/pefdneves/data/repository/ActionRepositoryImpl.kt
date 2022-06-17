@@ -1,7 +1,6 @@
 package com.pefdneves.data.repository
 
 import androidx.lifecycle.LiveData
-import com.pefdneves.data.Result
 import com.pefdneves.data.datasource.ActionLocalDataSource
 import com.pefdneves.data.entity.Action
 import dagger.Binds

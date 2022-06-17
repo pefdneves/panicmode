@@ -18,7 +18,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,8 @@
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_gravity="center"
-            android:src="@android:drawable/ic_menu_set_as" />
+            android:src="@android:drawable/ic_menu_set_as"
+            app:tint="@android:color/black" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             app:layout_constraintStart_toEndOf="@+id/iv_action_type"
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:textColor="@android:color/black"
                 bind:actionTypeToItemType="@{action.type}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +49,9 @@
                 tools:text="tipo de acção"/>
 
             <TextView
-                bind:actionTypeToItemDescription="@{action.type}"
+                android:textColor="@android:color/black"
                 bind:actionDescriptionToItemDescription="@{action.actionData}"
+                bind:actionTypeToItemDescription="@{action.type}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_action_type"
                 android:id="@+id/tv_action_description"

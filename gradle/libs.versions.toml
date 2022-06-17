@@ -21,6 +21,7 @@ androidxrecyclerview = "1.2.1"
 expandablefab = "1.2.1"
 androidxconstraintlayout = "2.1.4"
 androidxnavigation = "2.4.2"
+gson = "2.8.9"
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
@@ -37,7 +38,9 @@ junit = { module = "junit:junit", version.ref = "junit" }
 dagger-hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "daggercompiler" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler-ktx = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "archlifecycle" }
+androidx-lifecycle-livedata-core = { module = "androidx.lifecycle:lifecycle-livedata-core", version.ref = "archlifecycle" }
 compose-material-material = { module = "androidx.compose.material:material", version.ref = "compose" }
 compose-ui = { module = "androidx.compose.ui:ui-util", version.ref = "compose" }
 compose-runtime-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
@@ -52,6 +55,7 @@ androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayo
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "androidxrecyclerview"}
 androidx-navigationfragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidxnavigation"}
 androidx-navigationui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidxnavigation"}
+google-gson = { module = "com.google.code.gson:gson", version.ref = "gson"}
 
 
 

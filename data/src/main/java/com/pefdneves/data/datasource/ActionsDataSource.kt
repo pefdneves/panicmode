@@ -1,7 +1,6 @@
 package com.pefdneves.data.datasource
 
 import androidx.lifecycle.LiveData
-import com.pefdneves.data.Result
 import com.pefdneves.data.entity.Action
 
 interface ActionsDataSource {

@@ -9,12 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.pefdneves.ui.actions.databinding.FloatingActionMenuBinding
 import com.pefdneves.ui.actions.databinding.FragmentActionsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ActionsFragment : Fragment() {
 
     private lateinit var binding: FragmentActionsBinding
 
     private val viewModel: ActionsViewModel by viewModels()
+
+    private lateinit var listAdapter: ActionsAdapter
 
     private var isFabMenuVisible = false
 
@@ -23,27 +27,41 @@ class ActionsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentActionsBinding.inflate(layoutInflater, container, false)
+        binding = FragmentActionsBinding.inflate(layoutInflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewmodel = viewModel
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListAdapter()
         binding.layoutFab.initFabMenu()
+    }
+
+    private fun setupListAdapter() {
+        binding.viewmodel?.also {
+            listAdapter = ActionsAdapter(viewModel)
+            binding.actionsList.adapter = listAdapter
+        }
     }
 
     private fun FloatingActionMenuBinding.initFabMenu() {
         isFabMenuVisible = false
 
+        fabSendSms.setOnClickListener {
+            viewModel.option1Clicked()
+        }
+
         fabAddAction.setOnClickListener {
             if (!isFabMenuVisible) {
                 fabSendSms.apply {
-                    isVisible = true
                     show()
+                    isVisible = true
                 }
                 fabDeleteFolder.apply {
-                    isVisible = true
                     show()
+                    isVisible = true
                 }
                 isFabMenuVisible = true
             } else {
@@ -57,6 +75,7 @@ class ActionsFragment : Fragment() {
                 }
                 isFabMenuVisible = false
             }
+            binding.layoutFab.invalidateAll()
         }
     }
 }

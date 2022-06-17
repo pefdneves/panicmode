@@ -7,12 +7,16 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.pefdneves.data.entity.Action
+import com.pefdneves.data.entity.ActionSmsData
 
 @Dao
 interface ActionDao {
 
     @Query("SELECT * FROM `action`")
     fun observeActions(): LiveData<List<Action>>
+
+    @Query("SELECT * FROM `actiondatasms` WHERE action_data_id = :actionId")
+    fun getActionDataSmsForAction(actionId: Long): ActionSmsData
 
     @Query("SELECT * FROM `action` WHERE entry_id = :actionId")
     fun observeActionById(actionId: Long): LiveData<Action>
@@ -23,8 +27,11 @@ interface ActionDao {
     @Query("SELECT * FROM `action` WHERE entry_id = :actionId")
     suspend fun getActionById(actionId: Long): Action?
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertAction(action: Action)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertActionDataSms(actionData: ActionSmsData)
 
     @Update
     suspend fun updateAction(action: Action): Int
