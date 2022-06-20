@@ -10,6 +10,7 @@ import com.pefdneves.data.entity.Action
 import com.pefdneves.data.entity.ActionSmsData
 import com.pefdneves.data.entity.ActionType
 import com.pefdneves.data.repository.ActionRepository
+import com.pefdneves.ui.common.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,6 +19,9 @@ import javax.inject.Inject
 class ActionsViewModel @Inject constructor(
     private val actionRepository: ActionRepository
 ) : ViewModel() {
+
+    private val _deleteActionPopup = MutableLiveData<Event<() -> Unit>>()
+    val deleteActionPopup: LiveData<Event<() -> Unit>> = _deleteActionPopup
 
     private val _actions: MutableLiveData<List<Action>> = MutableLiveData(listOf())
     val actions: LiveData<List<Action>> = _actions
@@ -37,6 +41,17 @@ class ActionsViewModel @Inject constructor(
             }.onFailure {
                 // Error
             }
+        }
+    }
+
+    fun onActionClicked(action: Action) {
+        _deleteActionPopup.value = Event { deleteAction(action) }
+    }
+
+    private fun deleteAction(action: Action) {
+        viewModelScope.launch {
+            actionRepository.deleteAction(action.entryId)
+            fetchData()
         }
     }
 

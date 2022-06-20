@@ -2,4 +2,7 @@
 <resources>
     <string name="no_actions">No actions found! Start by adding some.</string>
     <string name="action_type_title_sms">Send an SMS</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="popup_delete_confirm">Are you sure you want to delete this action?</string>
 </resources>

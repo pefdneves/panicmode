@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -35,8 +36,33 @@ class ActionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
         setupListAdapter()
         binding.layoutFab.initFabMenu()
+    }
+
+    private fun observeViewModel() {
+        viewModel.deleteActionPopup.observe(
+            viewLifecycleOwner
+        ) { deleteFunction ->
+            deleteFunction.getContentIfNotHandled()?.also {
+                showDeleteActionPopup(it)
+            }
+        }
+    }
+
+    private fun showDeleteActionPopup(deleteFunction: () -> Unit) {
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setMessage(context?.getString(R.string.popup_delete_confirm))
+            .setPositiveButton(context?.getString(R.string.yes)) { dialog, _ ->
+                deleteFunction()
+                dialog.dismiss()
+            }
+            .setNegativeButton(context?.getString(R.string.no)) { dialog, _ ->
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 
     private fun setupListAdapter() {
