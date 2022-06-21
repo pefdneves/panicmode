@@ -77,6 +77,7 @@ class ActionsFragment : Fragment() {
 
         fabSendSms.setOnClickListener {
             viewModel.option1Clicked()
+            fabAddAction.callOnClick()
         }
 
         fabAddAction.setOnClickListener {

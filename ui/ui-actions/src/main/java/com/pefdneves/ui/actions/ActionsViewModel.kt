@@ -9,7 +9,9 @@ import androidx.lifecycle.viewModelScope
 import com.pefdneves.data.entity.Action
 import com.pefdneves.data.entity.ActionSmsData
 import com.pefdneves.data.entity.ActionType
-import com.pefdneves.data.repository.ActionRepository
+import com.pefdneves.domain.DeleteActionUseCase
+import com.pefdneves.domain.FetchActionsUseCase
+import com.pefdneves.domain.SaveActionUseCase
 import com.pefdneves.ui.common.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,7 +19,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ActionsViewModel @Inject constructor(
-    private val actionRepository: ActionRepository
+    private val fetchActionsUseCase: FetchActionsUseCase,
+    private val deleteActionUseCase: DeleteActionUseCase,
+    private val saveActionUseCase: SaveActionUseCase
 ) : ViewModel() {
 
     private val _deleteActionPopup = MutableLiveData<Event<() -> Unit>>()
@@ -36,7 +40,7 @@ class ActionsViewModel @Inject constructor(
 
     private fun fetchData() {
         viewModelScope.launch {
-            actionRepository.getActions().onSuccess {
+            fetchActionsUseCase().onSuccess {
                 _actions.value = it
             }.onFailure {
                 // Error
@@ -50,14 +54,14 @@ class ActionsViewModel @Inject constructor(
 
     private fun deleteAction(action: Action) {
         viewModelScope.launch {
-            actionRepository.deleteAction(action.entryId)
+            deleteActionUseCase(action)
             fetchData()
         }
     }
 
     fun option1Clicked() {
         viewModelScope.launch {
-            actionRepository.saveAction(
+            saveActionUseCase(
                 Action(
                     type = ActionType.SEND_SMS,
                     actionData = ActionSmsData(
@@ -66,7 +70,7 @@ class ActionsViewModel @Inject constructor(
                     )
                 )
             )
-            actionRepository.getActions().onSuccess {
+            fetchActionsUseCase().onSuccess {
                 Log.e("teste", it.size.toString())
             }
             fetchData()
