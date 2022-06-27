@@ -5,6 +5,7 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.pefdneves.data.entity.ActionData
+import com.pefdneves.data.entity.ActionDeleteFolder
 import com.pefdneves.data.entity.ActionSmsData
 import org.json.JSONException
 import java.lang.reflect.Type
@@ -23,6 +24,9 @@ class ActionDataDeserializer : JsonDeserializer<ActionData> {
                 json.hasAllFieldsFor(ActionSmsData::class.java) -> {
                     context?.deserialize(json, ActionSmsData::class.java)
                 }
+                json.hasAllFieldsFor(ActionDeleteFolder::class.java) -> {
+                    context?.deserialize(json, ActionDeleteFolder::class.java)
+                }
                 else -> {
                     null
                 }
@@ -32,8 +36,8 @@ class ActionDataDeserializer : JsonDeserializer<ActionData> {
         }
     }
 
-    private fun JsonObject?.hasAllFieldsFor(java: Class<ActionSmsData>): Boolean {
-        val fields = java.declaredFields
+    private fun JsonObject?.hasAllFieldsFor(clazz: Type): Boolean {
+        val fields = clazz.javaClass.declaredFields
         if (fields.isEmpty() || this == null) return false
 
         var hasFields = true

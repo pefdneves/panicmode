@@ -5,6 +5,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pefdneves.data.entity.Action
 import com.pefdneves.data.entity.ActionData
+import com.pefdneves.data.entity.ActionDeleteFolder
 import com.pefdneves.data.entity.ActionSmsData
 import com.pefdneves.data.entity.ActionType
 import com.pefdneves.ui.common.R as UiCommonR
@@ -24,7 +25,11 @@ fun setItemDescription(textView: TextView, type: ActionType?, data: ActionData?)
             textView.text = when (actionType) {
                 ActionType.SEND_SMS -> {
                     val action = actionData as ActionSmsData
-                    "${action.recipient} : ${action.message}"
+                    "${action.actionDataId} - ${action.recipient} : ${action.message}"
+                }
+                ActionType.DELETE_FOLDER -> {
+                    val action = actionData as ActionDeleteFolder
+                    "${action.actionDataId} - path:${action.path}"
                 }
                 else -> context.getString(UiCommonR.string.default_error)
             }
@@ -38,6 +43,7 @@ fun setItemTitle(textView: TextView, type: ActionType?) {
     type?.also {
         textView.text = when (type) {
             ActionType.SEND_SMS -> context.getString(R.string.action_type_title_sms)
+            ActionType.DELETE_FOLDER -> context.getString(R.string.action_type_delete_folder)
             else -> context.getString(UiCommonR.string.default_error)
         }
     }

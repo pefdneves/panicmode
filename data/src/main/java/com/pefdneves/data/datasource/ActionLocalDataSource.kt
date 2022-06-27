@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.pefdneves.data.dao.ActionDao
 import com.pefdneves.data.entity.Action
+import com.pefdneves.data.entity.ActionDeleteFolder
 import com.pefdneves.data.entity.ActionSmsData
 import com.pefdneves.data.entity.ActionType
 import kotlinx.coroutines.CoroutineDispatcher
@@ -35,6 +36,9 @@ class ActionLocalDataSource @Inject constructor(
         return when (action.type) {
             ActionType.SEND_SMS -> {
                 action.copy(actionData = actionDao.getActionDataSmsForAction(action.entryId))
+            }
+            ActionType.DELETE_FOLDER -> {
+                action.copy(actionData = actionDao.getActionDataDeleteFolderForAction(action.entryId))
             }
             else -> action
         }
@@ -69,11 +73,16 @@ class ActionLocalDataSource @Inject constructor(
 
     override suspend fun saveAction(action: Action) {
         return withContext(ioDispatcher) {
-            actionDao.insertAction(action)
+            val id = actionDao.insertAction(action)
             when (action.type) {
                 ActionType.SEND_SMS -> {
                     (action.actionData as? ActionSmsData)?.also {
-                        actionDao.insertActionDataSms(it)
+                        actionDao.insertActionDataSms(it.apply { actionEntryId = id })
+                    }
+                }
+                ActionType.DELETE_FOLDER -> {
+                    (action.actionData as? ActionDeleteFolder)?.also {
+                        actionDao.insertActionDataDeleteFolder(it.apply { actionEntryId = id })
                     }
                 }
                 else -> {}

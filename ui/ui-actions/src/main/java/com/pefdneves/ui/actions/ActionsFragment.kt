@@ -80,6 +80,11 @@ class ActionsFragment : Fragment() {
             fabAddAction.callOnClick()
         }
 
+        fabDeleteFolder.setOnClickListener {
+            viewModel.option2Clicked()
+            fabAddAction.callOnClick()
+        }
+
         fabAddAction.setOnClickListener {
             if (!isFabMenuVisible) {
                 fabSendSms.apply {

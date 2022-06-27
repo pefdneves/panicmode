@@ -7,6 +7,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pefdneves.data.entity.Action
+import com.pefdneves.data.entity.ActionDeleteFolder
 import com.pefdneves.data.entity.ActionSmsData
 import com.pefdneves.data.entity.ActionType
 import com.pefdneves.domain.DeleteActionUseCase
@@ -67,6 +68,23 @@ class ActionsViewModel @Inject constructor(
                     actionData = ActionSmsData(
                         "teste",
                         "00351934335287"
+                    )
+                )
+            )
+            fetchActionsUseCase().onSuccess {
+                Log.e("teste", it.size.toString())
+            }
+            fetchData()
+        }
+    }
+
+    fun option2Clicked() {
+        viewModelScope.launch {
+            saveActionUseCase(
+                Action(
+                    type = ActionType.DELETE_FOLDER,
+                    actionData = ActionDeleteFolder(
+                        "sdcard:/downloads",
                     )
                 )
             )

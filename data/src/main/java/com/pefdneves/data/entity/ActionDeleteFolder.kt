@@ -8,9 +8,9 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 
 @Entity(
-    tableName = "actiondatasms",
+    tableName = "actiondatadeletefolder",
     indices = [
-        Index(value = ["action_data_sms_id"], unique = true)
+        Index(value = ["action_data_delete_folder_id"], unique = true)
     ],
     foreignKeys = [
         ForeignKey(
@@ -24,9 +24,8 @@ import androidx.room.TypeConverters
 )
 
 @TypeConverters
-data class ActionSmsData(
-    @ColumnInfo(name = "message") var message: String = "",
-    @ColumnInfo(name = "recipient") var recipient: String = "",
+data class ActionDeleteFolder(
+    @ColumnInfo(name = "path") var path: String = "",
     @ColumnInfo(name = "action_entry_id") var actionEntryId: Long = 0,
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "action_data_sms_id") var actionDataId: Long = 0
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "action_data_delete_folder_id") var actionDataId: Long = 0
 ) : ActionData()

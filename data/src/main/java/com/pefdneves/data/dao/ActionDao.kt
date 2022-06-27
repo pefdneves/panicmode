@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.pefdneves.data.entity.Action
+import com.pefdneves.data.entity.ActionDeleteFolder
 import com.pefdneves.data.entity.ActionSmsData
 
 @Dao
@@ -15,8 +16,11 @@ interface ActionDao {
     @Query("SELECT * FROM `action`")
     fun observeActions(): LiveData<List<Action>>
 
-    @Query("SELECT * FROM `actiondatasms` WHERE action_data_id = :actionId")
+    @Query("SELECT * FROM `actiondatasms` WHERE action_entry_id = :actionId")
     fun getActionDataSmsForAction(actionId: Long): ActionSmsData
+
+    @Query("SELECT * FROM `actiondatadeletefolder` WHERE action_entry_id = :actionId")
+    fun getActionDataDeleteFolderForAction(actionId: Long): ActionDeleteFolder
 
     @Query("SELECT * FROM `action` WHERE entry_id = :actionId")
     fun observeActionById(actionId: Long): LiveData<Action>
@@ -28,10 +32,13 @@ interface ActionDao {
     suspend fun getActionById(actionId: Long): Action?
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insertAction(action: Action)
+    suspend fun insertAction(action: Action): Long
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertActionDataSms(actionData: ActionSmsData)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertActionDataDeleteFolder(actionData: ActionDeleteFolder)
 
     @Update
     suspend fun updateAction(action: Action): Int
