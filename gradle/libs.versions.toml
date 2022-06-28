@@ -22,6 +22,8 @@ expandablefab = "1.2.1"
 androidxconstraintlayout = "2.1.4"
 androidxnavigation = "2.4.2"
 gson = "2.8.9"
+timber = "5.0.1"
+androidxstartup = "1.1.1"
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
@@ -56,6 +58,8 @@ androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version
 androidx-navigationfragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidxnavigation"}
 androidx-navigationui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidxnavigation"}
 google-gson = { module = "com.google.code.gson:gson", version.ref = "gson"}
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber"}
+androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "androidxstartup"}
 
 
 

@@ -1,6 +1,5 @@
 package com.pefdneves.ui.actions
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -16,6 +15,7 @@ import com.pefdneves.domain.SaveActionUseCase
 import com.pefdneves.ui.common.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -72,7 +72,7 @@ class ActionsViewModel @Inject constructor(
                 )
             )
             fetchActionsUseCase().onSuccess {
-                Log.e("teste", it.size.toString())
+                Timber.d("teste", it.size.toString())
             }
             fetchData()
         }
@@ -89,7 +89,7 @@ class ActionsViewModel @Inject constructor(
                 )
             )
             fetchActionsUseCase().onSuccess {
-                Log.e("teste", it.size.toString())
+                Timber.d("teste", it.size.toString())
             }
             fetchData()
         }

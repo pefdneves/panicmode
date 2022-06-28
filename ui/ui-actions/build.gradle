@@ -27,6 +27,7 @@ android {
 dependencies {
     implementation project(':ui:ui-common')
     implementation project(':data')
+    implementation project(':core')
     implementation project(':domain')
 
     implementation libs.androidx.fragment
@@ -37,8 +38,11 @@ dependencies {
 
     implementation libs.androidx.lifecycle.livedata
     implementation libs.androidx.lifecycle.livedata.core
+
     implementation libs.dagger.hilt
     kapt libs.dagger.hilt.compiler
+
+    implementation libs.timber
 
     testImplementation libs.junit
 }
