@@ -54,6 +54,7 @@ dependencies {
     implementation project(':ui:ui-splash')
     implementation project(':ui:ui-wizard')
     implementation project(':ui:ui-actions')
+    implementation project(':ui:ui-panic')
 
     implementation libs.androidx.core
     implementation libs.androidx.appcompat

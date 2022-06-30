@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">PanicMode</string>
-    <string name="title_activity_main">Panic Mode</string>
+    <string name="title_activity_main">Panic Settings</string>
+    <string name="title_activity_panic">Panic!</string>
 </resources>

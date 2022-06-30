@@ -17,10 +17,11 @@ enableFeaturePreview('VERSION_CATALOGS')
 
 rootProject.name = "PanicMode"
 include ':app'
-include ':ui:ui-splash'
-include ':ui:ui-actions'
 include ':core'
 include ':data'
 include ':domain'
 include ':ui:ui-common'
 include ':ui:ui-wizard'
+include ':ui:ui-splash'
+include ':ui:ui-actions'
+include ':ui:ui-panic'
