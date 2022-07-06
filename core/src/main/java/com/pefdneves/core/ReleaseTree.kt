@@ -8,6 +8,6 @@ class ReleaseTree : Timber.Tree() {
         if (priority == Log.VERBOSE || priority == Log.DEBUG) {
             return
         }
-        super.log(priority,tag,message,t)
+        super.log(priority, tag, message, t)
     }
 }

@@ -2,21 +2,20 @@ package com.pefdneves.data.datasource
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
+import com.pefdneves.core.IoDispatcher
 import com.pefdneves.data.dao.ActionDao
 import com.pefdneves.data.entity.Action
 import com.pefdneves.data.entity.ActionDeleteFolder
 import com.pefdneves.data.entity.ActionSmsData
 import com.pefdneves.data.entity.ActionType
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ActionLocalDataSource @Inject constructor(
-    private val actionDao: ActionDao
+    private val actionDao: ActionDao,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ActionsDataSource {
-
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 
     override fun observeActions(): LiveData<Result<List<Action>>> {
         return actionDao.observeActions().map {

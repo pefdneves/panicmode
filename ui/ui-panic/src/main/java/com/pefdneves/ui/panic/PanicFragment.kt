@@ -33,6 +33,5 @@ class PanicFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-
     }
 }

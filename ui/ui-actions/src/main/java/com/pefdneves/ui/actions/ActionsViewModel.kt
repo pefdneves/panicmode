@@ -73,6 +73,8 @@ class ActionsViewModel @Inject constructor(
             )
             fetchActionsUseCase().onSuccess {
                 Timber.d("teste", it.size.toString())
+            }.onFailure {
+                Timber.d("Error fetching actions")
             }
             fetchData()
         }
@@ -90,6 +92,8 @@ class ActionsViewModel @Inject constructor(
             )
             fetchActionsUseCase().onSuccess {
                 Timber.d("teste", it.size.toString())
+            }.onFailure {
+                Timber.d("Error fetching actions")
             }
             fetchData()
         }
