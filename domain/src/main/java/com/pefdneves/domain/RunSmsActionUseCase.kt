@@ -25,8 +25,12 @@ class RunSmsActionUseCaseImpl @Inject constructor() : RunSmsActionUseCase {
 
         delay(param.delay)
 
-        val smsManager = SmsManager.getDefault()
-        smsManager.sendTextMessage(actionData?.recipient, null, actionData?.message, null, null)
+        try {
+            val smsManager = SmsManager.getDefault()
+            smsManager.sendTextMessage(actionData?.recipient, null, actionData?.message, null, null)
+        } catch (ex: Exception) {
+            return Result.failure(ex)
+        }
 
         return Result.success(Unit)
     }
