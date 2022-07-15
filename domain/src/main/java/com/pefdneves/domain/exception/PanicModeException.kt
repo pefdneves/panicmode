@@ -1,4 +1,4 @@
-package com.pefdneves.domain
+package com.pefdneves.domain.exception
 
 open class PanicModeException(msg: String) : Exception(msg)
 

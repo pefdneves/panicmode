@@ -4,6 +4,7 @@ import com.pefdneves.data.entity.Action
 import com.pefdneves.data.entity.ActionSmsData
 import com.pefdneves.data.entity.ActionType
 import com.pefdneves.domain.base.SuspendedUseCaseWithParams
+import com.pefdneves.domain.exception.InvalidActionException
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
