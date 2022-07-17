@@ -1,6 +1,6 @@
 [versions]
 spotless = "6.5.2"
-kotlinandroid = "1.6.10"
+kotlinandroid = "1.6.20"
 androidlibrary = "7.1.3"
 androidapplication = "7.1.3"
 androidxappcompat = "1.4.1"
