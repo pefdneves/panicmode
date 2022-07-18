@@ -15,11 +15,17 @@ import javax.inject.Inject
 
 interface RunSmsActionUseCase : SuspendedUseCaseWithParams<Result<Unit>, Action>
 
-class RunSmsActionUseCaseImpl @Inject constructor() : RunSmsActionUseCase {
+class RunSmsActionUseCaseImpl @Inject constructor(
+    private val smsManager: SmsManager?
+) : RunSmsActionUseCase {
 
     override suspend fun invoke(param: Action): Result<Unit> {
         if (param.type != ActionType.SEND_SMS || param.actionData !is ActionSmsData) {
             return Result.failure(InvalidActionException("Invalid action type or action data type: ${param.type}"))
+        }
+
+        if (smsManager == null) {
+            return Result.failure(InvalidActionException("SmsManager is null"))
         }
 
         val actionData = param.actionData as? ActionSmsData
@@ -27,7 +33,6 @@ class RunSmsActionUseCaseImpl @Inject constructor() : RunSmsActionUseCase {
         delay(param.delay)
 
         try {
-            val smsManager = SmsManager.getDefault()
             smsManager.sendTextMessage(actionData?.recipient, null, actionData?.message, null, null)
         } catch (ex: Exception) {
             return Result.failure(ex)
