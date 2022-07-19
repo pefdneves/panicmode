@@ -7,9 +7,9 @@ import com.pefdneves.data.entity.ActionSmsData
 import com.pefdneves.data.entity.ActionType
 import io.mockk.Runs
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
-import io.mockk.just
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
